@@ -104,8 +104,8 @@ class ServerlessPlugin {
 
                 signerProcesses[lambda_function] = {
                     signerConfiguration: _.merge({
-                        source: {s3: {key: "sign-request/" + this.serverless.service.service + "/" + lambda_function + "-" + ts + ".zip"}},
-                        destination: {s3: {prefix: "signed/" + this.serverless.service.service + "/" + lambda_function + "-" + ts + "-"}}
+                        source: {s3: {key: "sign-request/" + this.serverless.service.service + "/" + ts + "/" + lambda_function + ".zip"}},
+                        destination: {s3: {prefix: "signed/" + this.serverless.service.service + "/" + ts + "/" + lambda_function + "-"}}
                     }, defaultConfig, this.serverless.service.custom.signer), packageArtifact: custom_resources
                 }
 
@@ -156,10 +156,8 @@ class ServerlessPlugin {
             const lambda_function = "common";
             signerProcesses[lambda_function] = {
                 signerConfiguration: _.merge({
-                    source: {s3: {key: "sign-request/" + this.serverless.service.service + "/" + lambda_function + "-" + ts + ".zip"}},
-                    destination: {
-                        s3: {prefix: "signed/" + this.serverless.service.service + "/" + lambda_function + "-" + ts + "-"}
-                    }
+                    source: {s3: {key: "sign-request/" + this.serverless.service.service + "/" + ts + "/" + lambda_function + ".zip"}},
+                    destination: {s3: {prefix: "signed/" + this.serverless.service.service + "/" + ts + "/" + lambda_function + "-"}}
                 }, defaultConfig, this.serverless.service.custom.signer),
                 packageArtifact: this.serverless.service.package.artifact
             }
